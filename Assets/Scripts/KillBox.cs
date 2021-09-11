@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MichaelWolf;
 using UnityEngine;
 
 public class KillBox : MonoBehaviour
@@ -9,6 +10,8 @@ public class KillBox : MonoBehaviour
         if (other.tag == "Player")
         {
             PlayerReset.Instance?.ResetLastPosition();
+            
+            ECMPlayerReset.Instance?.ResetLastPosition();
         }
     }
 }
