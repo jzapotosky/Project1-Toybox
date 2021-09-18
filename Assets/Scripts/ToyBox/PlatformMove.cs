@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,18 @@ public class PlatformMove : MonoBehaviour
     private bool _waiting = false;
     private float _currWait = 0;
 
+    private Vector3 _prevPos = Vector3.zero;
+    private Vector3 _currVel = Vector3.zero;
+
+    private bool _playerOn = false;
+    private ThirdPersonController _controllerThird = null;
+    private FirstPersonController _controllerFirst = null;
+
+    private void Awake()
+    {
+        _prevPos = _platform.transform.position;
+    }
+
     void Start()
     {
         if(_moveNodes.Count < 2)
@@ -48,6 +61,8 @@ public class PlatformMove : MonoBehaviour
         {
             if(_waiting)
             {
+                _currVel = Vector3.zero;
+
                 _currWait += Time.deltaTime;
 
                 if(_currWait > _waitTime)
@@ -59,6 +74,9 @@ public class PlatformMove : MonoBehaviour
             else
             {
                 _platform.transform.position = Vector3.MoveTowards(_platform.transform.position, _moveNodes[_target].position, _moveSpeed * Time.deltaTime);
+
+                _currVel = _platform.transform.position - _prevPos;
+                _prevPos = _platform.transform.position;
 
                 if (Vector3.Distance(_platform.transform.position, _moveNodes[_target].position) < _arrivedThres)
                 {
@@ -74,6 +92,18 @@ public class PlatformMove : MonoBehaviour
                     if (_waitAtNodes && !_endpointsOnly) { _waiting = true; }
                 }
             }
+
+            if(_playerOn)
+            {
+                if (_controllerThird != null)
+                {
+                    _controllerThird.AddPlatformVelocity(_currVel);
+                }
+                else if (_controllerFirst != null)
+                {
+                    _controllerFirst.AddPlatformVelocity(_currVel);
+                }
+            }
         }
     }
 
@@ -85,5 +115,23 @@ public class PlatformMove : MonoBehaviour
     public void Deactivate()
     {
         _activated = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            if (_controllerThird == null) { _controllerThird = other.gameObject.GetComponent<ThirdPersonController>(); }
+            if (_controllerFirst == null) { _controllerFirst = other.gameObject.GetComponent<FirstPersonController>(); }
+            _playerOn = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            _playerOn = false;
+        }
     }
 }

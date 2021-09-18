@@ -130,7 +130,13 @@ namespace StarterAssets
 			}
 		}
 
-		private void Move()
+        private Vector3 _currPlatVel = Vector3.zero;
+        public void AddPlatformVelocity(Vector3 velocity)
+        {
+            _currPlatVel = velocity;
+        }
+
+        private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
@@ -148,16 +154,16 @@ namespace StarterAssets
 			float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
 			// accelerate or decelerate to target speed
-			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
-			{
-				// creates curved result rather than a linear one giving a more organic speed change
-				// note T in Lerp is clamped, so we don't need to clamp our speed
-				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
+			//if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
+			//{
+			//	// creates curved result rather than a linear one giving a more organic speed change
+			//	// note T in Lerp is clamped, so we don't need to clamp our speed
+			//	_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
 
-				// round speed to 3 decimal places
-				_speed = Mathf.Round(_speed * 1000f) / 1000f;
-			}
-			else
+			//	// round speed to 3 decimal places
+			//	_speed = Mathf.Round(_speed * 1000f) / 1000f;
+			//}
+			//else
 			{
 				_speed = targetSpeed;
 			}
@@ -174,7 +180,9 @@ namespace StarterAssets
 			}
 
 			// move the player
-			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime + _currPlatVel);
+
+            _currPlatVel = Vector3.zero;
 		}
 
 		private void JumpAndGravity()
