@@ -25,11 +25,11 @@ public class CharacterListUI : MonoBehaviour
 
     private void PopulateList()
     {
-        //    foreach (Character character in _characters)
-        //    {
-        //        CharacterUI characterUI = Instantiate(_prefab, _parentContainer);
-        //        characterUI.SetData(character);
-        //        characterUI.gameObject.SetActive(true);
-        //    }
+        foreach (Character character in _characters)
+        {
+            CharacterUI characterUI = Instantiate(_prefab, _parentContainer);
+            characterUI.SetData(character);
+            characterUI.gameObject.SetActive(true);
+        }
     }
 }

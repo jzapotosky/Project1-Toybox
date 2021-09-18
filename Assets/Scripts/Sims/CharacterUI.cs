@@ -13,13 +13,13 @@ public class CharacterUI : MonoBehaviour
     [SerializeField] private TMP_Text _heightLabel = null;
 
 
-    //public void SetData(Character characterData)
-    //{
-    //    _firstNameLabel.text = "First Name: " + characterData.FirstName;
-    //    _lastNameLabel.text = "Last Name: " + characterData.FirstName;
-    //    _middleInitalLabel.text = "Middle Initial: " + characterData.MiddleInitial;
-    //    _ageLabel.text = "Age: " + characterData.Age;
-    //    _marriedLabel.text = "Married? " + characterData.Married;
-    //    _heightLabel.text = "Height: " + characterData.Height + "in";
-    //}
+    public void SetData(Character characterData)
+    {
+        _firstNameLabel.text = "First Name: " + characterData.FirstName;
+        _lastNameLabel.text = "Last Name: " + characterData.LastName;
+        _middleInitalLabel.text = "Middle Initial: " + characterData.MiddleInitial;
+        _ageLabel.text = "Age: " + characterData.Age;
+        _marriedLabel.text = "Married? " + characterData.Married;
+        _heightLabel.text = "Height: " + characterData.Height + "in";
+    }
 }
