@@ -43,7 +43,7 @@ public class PlatformMove : MonoBehaviour
     {
         if(_moveNodes.Count < 2)
         {
-            Debug.LogError("Platform Move requires a minimum of 2 nodes. " + gameObject.name + " was deactivated!");
+            //Debug.LogError("Platform Move requires a minimum of 2 nodes. " + gameObject.name + " was deactivated!");
         }
 
         if(_waitOnStart && _waitAtNodes)
