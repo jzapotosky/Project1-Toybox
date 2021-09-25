@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class FallingPlatform : MonoBehaviour
 {
-    [SerializeField] private bool isFalling = false;
-    [SerializeField] private float downSpeed = 0;
+    public Rigidbody rigidbody = null;
 
     // Start is called before the first frame update
     void Start()
     {
- 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isFalling)
-        {
-            downSpeed += Time.deltaTime/10;
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        }
     }
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject.name == "Player")
+        Debug.LogError("Collided with " + collider.gameObject.name);
+
+        if (collider.gameObject.tag == "Player")
         {
-            isFalling = true;
-            Destroy(gameObject, 10);
+            StartCoroutine(PlatformFallDelay());
         }
+    }
+    private IEnumerator PlatformFallDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        rigidbody.useGravity = true;
+        Destroy(gameObject, 10);
     }
 }
