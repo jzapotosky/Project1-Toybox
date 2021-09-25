@@ -10,12 +10,15 @@ public class TankController : MonoBehaviour
     [SerializeField] private float _turretTurnSpeed = 0;
     [SerializeField] private Transform _turretTransform = null;
 
+    private Rigidbody rigidbody = null;
+
     private Keyboard _keyboard = null;
     private Mouse _mouse = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        rigidbody = gameObject.GetComponent<Rigidbody>();
         _keyboard = Keyboard.current;
         _mouse = Mouse.current;
     }
@@ -61,6 +64,11 @@ public class TankController : MonoBehaviour
     private void RotateTurret()
     {
         _turretTransform.Rotate(Vector3.up, _turretTurnSpeed * Time.deltaTime * _mouse.delta.x.ReadValue());
+    }
+
+    public void OnProjectileHit(Vector3 dir, float force)
+    {
+        rigidbody.AddForce(dir * force);
     }
 
 }
