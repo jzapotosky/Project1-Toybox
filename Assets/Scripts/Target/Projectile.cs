@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float flightspeed;
     [SerializeField] private float lifetime;
 
+    public float projectileForce = 90f;
+
     private float currLifeTime = 0;
 
     // Start is called before the first frame update
@@ -35,7 +37,7 @@ public class Projectile : MonoBehaviour
             TankController tController = collision.gameObject.GetComponent<TankController>();
             if(tController != null)
             {
-                tController.OnProjectileHit(transform.forward, 30f);
+                tController.OnProjectileHit(transform.forward, projectileForce);
             }
         }
         Debug.LogError("Collided with " + collision.gameObject.name);

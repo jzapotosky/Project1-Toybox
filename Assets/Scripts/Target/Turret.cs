@@ -8,6 +8,9 @@ public class Turret : MonoBehaviour
     [SerializeField] private float firingDelay;
     [SerializeField] private Transform player;
 
+    public Transform spawnPoint;
+    public Projectile prefab;
+
     private float currDelayTime = 0;
 
     // Start is called before the first frame update
@@ -47,6 +50,6 @@ public class Turret : MonoBehaviour
 
     public void Shoot()
     {
-
+        Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
     }
 }

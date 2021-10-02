@@ -71,4 +71,8 @@ public class TankController : MonoBehaviour
         rigidbody.AddForce(dir * force);
     }
 
+    public void OnLandmineHit(float force)
+    {
+        rigidbody.AddForce(Vector3.up * force);
+    }
 }
