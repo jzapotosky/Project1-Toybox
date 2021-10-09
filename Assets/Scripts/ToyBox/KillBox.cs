@@ -11,4 +11,10 @@ public class KillBox : MonoBehaviour
             PlayerReset.Instance?.ResetLastPosition();
         }
     }
+
+    private IEnumerator PlatformFallDelay()
+    {
+        yield return new WaitForSeconds(1f);
+
+    }
 }
