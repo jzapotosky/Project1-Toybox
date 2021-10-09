@@ -36,7 +36,7 @@ public class PlayerReset : MonoBehaviour
         }
     }
 
-    private void RecordTransform()
+    public void RecordTransform()
     {
         _lastPosition = transform.position;
         _lastRotation = transform.rotation;
