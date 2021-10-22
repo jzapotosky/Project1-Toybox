@@ -2222,6 +2222,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1486227450}
   optionsMenu: {fileID: 1562257475}
+  _volumeSlider: {fileID: 743828210}
+  _vsyncToggle: {fileID: 192720469}
+  _dropDown: {fileID: 1770815410}
+  _volume: 1
+  _vsync: 1
+  _languageSelected: 0
 --- !u!1 &1084800693
 GameObject:
   m_ObjectHideFlags: 0
