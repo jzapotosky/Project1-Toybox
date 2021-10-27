@@ -2466,13 +2466,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xTurn: 1
   xTurnUI: {fileID: 1583942785}
-  oturnUI: {fileID: 2138877998}
+  oTurnUI: {fileID: 2138877998}
   xWinUI: {fileID: 1657632110}
   oWinUI: {fileID: 1098920415}
-  drawUI: {fileID: 675770543}
-  resetButton: {fileID: 1061782945}
   xPrefab: {fileID: 7230154166915956980, guid: a5bf10ebf80d57b4f8712867f33bf86f, type: 3}
   oPrefab: {fileID: 6897220060637496259, guid: 49ac02cf2f69cfb4781e611db7a72632, type: 3}
+  resetButton: {fileID: 0}
 --- !u!4 &1915844109
 Transform:
   m_ObjectHideFlags: 0
